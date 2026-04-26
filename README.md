@@ -1,96 +1,88 @@
 ### Neovim Setup / Tables of Contents :computer:
 
-1. [Setup Guides](#setup-guides-grey_question)
+1. [Notes](#notes-information_source)
 2. [Plugins](#plugins-books)
 3. [General Notes](#general-notes-information_desk_person)
 4. [Options Notes](#options-notes-mag_right)
 5. [Lua Notes](#lua-notes-bulb)
 
+### Notes :information_source:
+
+**Dotfiles**
+
+Managed with [GNU Stow](https://www.gnu.org/software/stow/).
+
 ### Plugins :books:
 
-**Plugin Manager**  
-[folke/lazy.nvim](https://github.com/folke/lazy.nvim) - plugin manager
+**Plugin Manager**
+- [folke/lazy.nvim](https://github.com/folke/lazy.nvim) - plugin manager
 
-**Dependency For Other Plugins**  
-[nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Useful lua functions other plugins use
+**Dependencies For Other Plugins**
+- [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) - Lua helpers used by Telescope, todo-comments and other plugins
+- [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - icons for UI plugins
+- [MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim) - UI dependency for noice.nvim
+- [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify) - notification UI used by noice.nvim
 
-**Essentials**  
-[kylechui/nvim-surround](https://github.com/kylechui/nvim-surround) - manipulate surroundings with "ys", "ds", and "cs"  
-[christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) - Navigating Between Neovim Windows and Tmux  
-[vim-maximizer](https://github.com/szw/vim-maximizer) - Maximizes and restore current window  
-[lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Show line modifications on left hand side for Git  
-[rmagatti/auto-session](https://github.com/rmagatti/auto-session) - Session Manager
+**Essentials**
+- [kylechui/nvim-surround](https://github.com/kylechui/nvim-surround) - manipulate surroundings with "ys", "ds", and "cs"
+- [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) - Navigating Between Neovim Windows and Tmux
+- [szw/vim-maximizer](https://github.com/szw/vim-maximizer) - maximize and restore current window
+- [lewis6991/gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Show line modifications on left hand side for Git
+- [rmagatti/auto-session](https://github.com/rmagatti/auto-session) - Session Manager
+- [stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim) - improved `vim.ui.select` and `vim.ui.input`
 
-**Interface**  
-[mhartington/oceanic-next](https://github.com/mhartington/oceanic-next) - Colorscheme  
-[nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - Status Line  
-[kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - VS Code Like Icons  
-[akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim) - Buffer Line  
-[goolord/alpha-nvim](https://github.com/goolord/alpha-nvim) - Neovim Greeter  
-[lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) - Indentation guides  
-[echasnovski/mini.indetscope](https://github.com/echasnovski/mini.indentscope) - active indent guide and indent text objects--
-[folke/noice.nvim](https://github.com/folke/noice.nvim) - replaces the UI for messages, cmdline and the popupmenu
+**Interface**
+- [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim) - Colorscheme
+- [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - Status Line
+- [goolord/alpha-nvim](https://github.com/goolord/alpha-nvim) - Neovim Greeter
+- [lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) - Indentation guides
+- [echasnovski/mini.indentscope](https://github.com/echasnovski/mini.indentscope) - active indent guide and indent text objects
+- [folke/noice.nvim](https://github.com/folke/noice.nvim) - replaces the UI for messages, cmdline and the popupmenu
+- [folke/which-key.nvim](https://github.com/folke/which-key.nvim) - keymap hints
 
-**Fuzzy Finder**  
-[nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim) - Dependency for better performance  
-[nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy Finder  
-[stevearc/dressing.nvim](https://github.com/stevearc/dressing.nvim) - select/input ui improvement
+**Fuzzy Finder**
+- [nvim-telescope/telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim) - Dependency for better performance
+- [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy Finder
 
-**Keymap Suggestions**  
-[folke/which-key.nvim](https://github.com/folke/which-key.nvim)
+**Autocompletion**
+- [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion plugin
+- [hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Completion source for text in current buffer
+- [hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path) - Completion source for file system paths
+- [hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline) - Completion source for vim's cmdline
+- [hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Smart code autocompletion with lsp
+- [onsails/lspkind.nvim](https://github.com/onsails/lspkind.nvim) - VS Code Like Icons for autocompletion
 
-**Autocompletion**  
-[fhrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp) - Completion plugin  
-[hrsh7th/cmp-buffer](https://github.com/hrsh7th/cmp-buffer) - Completion source for text in current buffer  
-[hrsh7th/cmp-path](https://github.com/hrsh7th/cmp-path) - Completion source for file system paths  
-[hrsh7th/cmp-cmdline](https://github.com/hrsh7th/cmp-cmdline) - Completion source for vim's cmdline
+**Snippets**
+- [L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip) - Snippet engine
+- [rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) - Useful snippets for different languages
+- [saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) Completion source for snippet autocomplete
 
-[onsails/lspkind.nvim](https://github.com/onsails/lspkind.nvim) - Vs Code Like Icons for autocompletion  
-[windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Use treesitter to autoclose and autorename html tag
+**Comments**
+- [numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim) - toggle comments with "gc"
+- [JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) - Requires treesitter
+- [folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim) - highlight/search for comments like todo/hack/bug
 
-**Snippets**  
-[L3MON4D3/LuaSnip](https://github.com/L3MON4D3/LuaSnip) - Snippet engine  
-[rafamadriz/friendly-snippets](https://github.com/rafamadriz/friendly-snippets) - Useful snippets for different languages  
-[saadparwaiz1/cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip) Completion source for snippet autocomplete
+**Treesitter Syntax Highlighting, Autoclosing & Text Objects**
+- [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - syntax parsing and highlighting
+- [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs) - Autoclose brackets, parens, quotes, etc...
+- [windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Autoclose tags
 
-**Comments**  
-[numToStr/Comment.nvim](https://github.com/numToStr/Comment.nvim) - toggle comments with "gc"  
-[JoosepAlviste/nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring) - Requires treesitter  
-[folke/todo-comments.nvim](https://github.com/folke/todo-comments.nvim) - highlight/search for comments like todo/hack/bug
+**Managing & Installing Language Servers, Linters & Formatters**
+- [williamboman/mason.nvim](https://github.com/williamboman/mason.nvim) - Mason package manager
+- [williamboman/mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) - Bridges gap between mason & lspconfig
+- [WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) - Auto install linters & formatters on startup
 
-**Treesitter Syntax Highlighting, Autoclosing & Text Objects**  
-[nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Treesitter configuration  
-[windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs) - Autoclose brackets, parens, quotes, etc...  
-[windwp/nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag) - Autoclose tags
+**LSP Configuration**
+- [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - Easy way to configure lsp servers
+- [folke/lazydev.nvim](https://github.com/folke/lazydev.nvim) - Lua development setup for Neovim config
+- [antosha417/nvim-lsp-file-operations](https://github.com/antosha417/nvim-lsp-file-operations) - LSP-aware file operations
 
-**Markdown Preview**  
-[iamcco/markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
+**Trouble.nvim**
+- [folke/trouble.nvim](https://github.com/folke/trouble.nvim) - nice way to see diagnostics and other stuff
 
-**Managing & Installing Language Servers, Linters & Formatters**  
-[williamboman/mason.nvim](https://github.com/williamboman/mason.nvim)
-
-**LSP Configuration**  
-[williamboman/mason-lspconfig.nvim](williamboman/mason-lspconfig.nvim) - Bridges gap b/w mason & lspconfig  
-[neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - Easy way to configure lsp servers  
-[hrsh7th/cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) - Smart code autocompletion with lsp
-
-**Trouble.nvim**  
-[folke/trouble.nvim](https://github.com/folke/trouble.nvim) - nice way to see diagnostics and other stuff
-
-**Formatting & Linting**  
-[stevearc/conform.nvim](https://github.com/stevearc/conform.nvim) - Easy way to configure formatters  
-[mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint) - Easy way to configure linters  
-[WhoIsSethDaniel/mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim) - Auto install linters & formatters on startup
-
-**_Unplugged plugins_**  
-[nvim-treesitter/nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) - Treesitter configuration  
-[norcali/colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua) - Color Highlighter  
-[nvim-tree](https://github.com/nvim-tree/nvim-tree.lua) - File Explorer  
-[ThePrimeagen/harpoon](https://github.com/ThePrimeagen/harpoon) - Marking Files With Prime's Harpoon  
-[gbprod/substitute.nvim](https://github.com/gbprod/substitute.nvim) - replace things with register with "s" and "S"  
-[kdheepak/lazygit.nvim](https://github.com/kdheepak/lazygit.nvim) - Use lazygit within Neovim
-
----
+**Formatting & Linting**
+- [stevearc/conform.nvim](https://github.com/stevearc/conform.nvim) - Easy way to configure formatters
+- [mfussenegger/nvim-lint](https://github.com/mfussenegger/nvim-lint) - Easy way to configure linters
 
 ### General Notes :information_desk_person:
 
@@ -104,9 +96,6 @@
 :help config
 :help events
 :checkhealth
-
-" Python support
-" pip install pynvim
 ```
 
 **LSP**  
@@ -127,23 +116,12 @@ brew install --cask font-jetbrains-mono-nerd-font
 brew install font-meslo-lg-nerd-font
 ```
 
-**How to set transparent background for iTerm2 in full screen mode on a Mac**
-
-1. Open your iTerm2-> Choose Full screen window style in Open profiles -> Edit profiles -> Window -> Stylesettings.
-2. Now un-check the Native full screen windows in General settings of iTerm2 (not the profile).
-3. Now you can choose the level transparency in Open profiles -> Edit profiles -> Window settings.
-
-Replaced by **WezTerm**
-
 **Extra information**
 
-File for configuring formatting for Lua: `.stylua.toml`  
 **Python:**
-- LSP: `pyright`  
-- Linting: `pylint`  
-- Formatting: `isort`, `black`
-
----
+- LSP: `ty`  
+- Linting: `ruff`  
+- Formatting: `ruff`
 
 ### Lua Notes :bulb:
 
@@ -189,8 +167,6 @@ vim.opt.wildignore:remove { "node_modules" }
 
 > Глобальная переменная 'vim' служит точкой входа для взаимодействия с Neovim API из Lua кода.
 > Мета-аксессоры обертывают функции API: `vim.api.nvim_set_option() = vim.opt.{option}`.
-
----
 
 ### Options Notes :mag_right:
 
