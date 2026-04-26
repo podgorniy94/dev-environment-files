@@ -8,9 +8,7 @@ return {
       javascript = { 'quick-lint-js' },
       htmldjango = { 'djlint' },
       -- svelte = { 'eslint_d' }
-
       -- python linting is handled by ruff LSP (via nvim-lspconfig)
-      -- python = { 'ruff' },
     }
 
     -- grouping together autocommands

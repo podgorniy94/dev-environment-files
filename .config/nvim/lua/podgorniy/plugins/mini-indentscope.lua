@@ -27,7 +27,6 @@ return {
           'startify',
           'toggleterm',
           'python',
-          'lua',
           'Trouble',
         }
         if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
