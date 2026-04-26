@@ -13,8 +13,8 @@ return {
         json = { 'prettier' },
         markdown = { 'prettier' },
         lua = { 'stylua' },
-        python = { 'ruff' },
         htmldjango = { 'djlint' },
+        python = { 'ruff' },
       },
     })
 

@@ -1,30 +1,7 @@
 return {
-  'williamboman/mason.nvim',
-  dependencies = {
-    'williamboman/mason-lspconfig.nvim', -- bridges mason.nvim with the lspconfig plugin
-    'WhoIsSethDaniel/mason-tool-installer.nvim', -- keep automatically up-to-date with tools
-  },
-  config = function()
-    -- import mason
-    local mason = require('mason')
-
-    -- import mason-lspconfig
-    local mason_lspconfig = require('mason-lspconfig')
-
-    local mason_tool_installer = require('mason-tool-installer')
-
-    -- enable mason and configure icons
-    mason.setup({
-      ui = {
-        icons = {
-          package_installed = '✓',
-          package_pending = '➜',
-          package_uninstalled = '✗',
-        },
-      },
-    })
-
-    mason_lspconfig.setup({
+  {
+    'williamboman/mason-lspconfig.nvim',
+    opts = {
       -- list of servers for mason to install
       ensure_installed = {
         'html',
@@ -34,18 +11,38 @@ return {
         'svelte',
         'ty',
       },
-    })
+    },
+    dependencies = {
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          -- enable mason and configure icons
+          ui = {
+            icons = {
+              package_installed = '✓',
+              package_pending = '➜',
+              package_uninstalled = '✗',
+            },
+          },
+        },
+      },
+      'neovim/nvim-lspconfig',
+    },
+  },
 
-    mason_tool_installer.setup({
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
       ensure_installed = {
         'prettier', -- prettier formatter
         'stylua', -- lua formatter
         'djlint', -- djangohtml, jinja formatter
         'quick-lint-js', -- js linter
-        -- 'ruff', -- python formatter, linting
-        -- 'mypy', -- python linter (static type checker)
-        -- 'eslint_d', -- for svelte linting
+        'ruff',
       },
-    })
-  end,
+    },
+    dependencies = {
+      'williamboman/mason.nvim',
+    },
+  },
 }
