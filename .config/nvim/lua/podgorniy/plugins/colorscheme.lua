@@ -43,28 +43,3 @@ return {
     vim.cmd('colorscheme tokyonight')
   end,
 }
-
--- oceanic-next transparent
--- return { -- ++
---   {
---     'mhartington/oceanic-next',
---     priority = 1000, -- make sure to load this before all the other start plugins
---     config = function()
---       vim.cmd([[colorscheme OceanicNext]])
---
---       vim.cmd([[hi Normal guibg=NONE ctermbg=NONE]])
---       vim.cmd([[hi LineNr guibg=NONE ctermbg=NONE]])
---       vim.cmd([[hi SignColumn guibg=NONE ctermbg=NONE]])
---       vim.cmd([[hi EndOfBuffer guibg=NONE ctermbg=NONE]])
---     end,
---   },
--- }
---
----- oceanic-next default
--- return { -- ++
---   'mhartington/oceanic-next',
---   priority = 1000, -- make sure to load this before all the other start plugins
---   config = function()
---     vim.cmd([[colorscheme OceanicNext]])
---   end,
--- }
