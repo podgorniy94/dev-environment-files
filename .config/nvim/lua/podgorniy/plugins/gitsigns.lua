@@ -1,16 +1,17 @@
 return {
   'lewis6991/gitsigns.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
+  init = function()
+    vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('gitsigns_netrw', { clear = true }),
+      pattern = 'netrw',
+      callback = function()
+        vim.opt_local.signcolumn = 'no'
+      end,
+    })
+  end,
   opts = {
-    -- Hide the empty sign column in netrw
     on_attach = function(bufnr)
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'netrw',
-        callback = function()
-          vim.opt_local.signcolumn = 'no'
-        end,
-      })
-
       local gs = package.loaded.gitsigns
 
       local function map(mode, l, r, desc)

@@ -18,12 +18,22 @@ o.softtabstop = 4 -- Количество пробелов, которыми с�
 o.tabstop = 4 -- Количество пробелов, которыми символ табуляции отображается в тексте
 
 -- Установка отступов для различных типов файлов
+local filetype_options_augroup = vim.api.nvim_create_augroup('podgorniy_filetype_options', { clear = true })
+
 local function set_filetype_options(filetype, options)
-  vim.cmd(string.format("autocmd FileType %s setlocal %s", filetype, options))
+  vim.api.nvim_create_autocmd('FileType', {
+    group = filetype_options_augroup,
+    pattern = filetype,
+    callback = function()
+      for option, value in pairs(options) do
+        vim.opt_local[option] = value
+      end
+    end,
+  })
 end
-set_filetype_options("html", "shiftwidth=2 tabstop=2 expandtab")
-set_filetype_options("htmldjango", "shiftwidth=2 tabstop=2 expandtab")
-set_filetype_options("javascript", "shiftwidth=2 tabstop=2 expandtab")
+set_filetype_options('html', { shiftwidth = 2, tabstop = 2, expandtab = true })
+set_filetype_options('htmldjango', { shiftwidth = 2, tabstop = 2, expandtab = true })
+set_filetype_options('javascript', { shiftwidth = 2, tabstop = 2, expandtab = true })
 
 -- SEARCH OPTIONS
 
@@ -63,16 +73,19 @@ o.spelllang:append({ 'ru' })
 o.spellsuggest = 'best, 6'
 o.swapfile = false
 o.virtualedit = 'block' -- Перемещение столбцов (rect) с использ. режима виз. блока
-o.wildignore = '*.docx,*.jpg,*.png,*..df,*.pyc,*.exe,*.flv,*.img,*.xlsx'
+o.wildignore = '*.docx,*.jpg,*.png,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx'
 
 -------------------------------------------------------------------------------
 -- Autocommands
 -- -------------------------------------------------------------------------------
 
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local core_augroup = augroup('podgorniy_core', { clear = true })
 
 -- Enable Spell Checker on certain files
 autocmd('FileType', {
+  group = core_augroup,
   pattern = { 'html', 'markdown', 'text' },
   callback = function()
     vim.opt_local.spell = true
@@ -81,7 +94,7 @@ autocmd('FileType', {
 
 -- Centering document vertically when entering insert mode
 
-autocmd('InsertEnter', { command = 'norm zz' })
+autocmd('InsertEnter', { group = core_augroup, command = 'norm zz' })
 
 -------------------------------------------------------------------------------
 -- NETRW FILE EXPLORER
@@ -110,9 +123,9 @@ keymap('n', '<leader>dd', ':Lexplore %:p:h<CR>', { noremap = true })
 keymap('n', '<leader>da', ':Lexplore<CR>', { noremap = true })
 
 -- Window navigation on Netrw buffers
-vim.api.nvim_create_augroup('netrw_mappings', { clear = true })
+local netrw_augroup = vim.api.nvim_create_augroup('netrw_mappings', { clear = true })
 autocmd('filetype', {
-  group = 'netrw_mappings',
+  group = netrw_augroup,
   pattern = 'netrw',
   callback = function()
     buf_set_keymap(0, 'n', '<C-h>', ':wincmd h<cr>', opts)
@@ -122,25 +135,24 @@ autocmd('filetype', {
   end,
 })
 
--- Create file without opening buffer
-vim.cmd([[
-function! CreateInPreview()
-  let l:filename = input('please enter filename: ')
-  execute 'silent !touch ' . b:netrw_curdir.'/'.l:filename
-  redraw!
-endfunction
-]])
+-- Netrw: create file without opening a buffer or calling a shell
+autocmd('FileType', {
+  group = netrw_augroup,
+  pattern = 'netrw',
+  callback = function()
+    vim.keymap.set('n', '%', function()
+      local filename = vim.fn.input('please enter filename: ')
+      if filename == '' then
+        return
+      end
 
--- Netrw: create file using touch instead of opening a buffer
-vim.cmd([[
-function! Netrw_mappings()
-  noremap <buffer>% :call CreateInPreview()<cr>
-endfunction
-
-augroup auto_commands
-    autocmd filetype netrw call Netrw_mappings()
-augroup END
-]])
+      local path = vim.fs.joinpath(vim.b.netrw_curdir, filename)
+      local file = assert(io.open(path, 'a'))
+      file:close()
+      vim.cmd('redraw!')
+    end, { buffer = true, noremap = true, silent = true })
+  end,
+})
 
 -- DEFAULTS
 
