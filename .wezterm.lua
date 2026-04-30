@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local act = wezterm.action
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -30,6 +31,35 @@ config.window_decorations = "RESIZE"
 
 config.initial_rows = 45
 config.initial_cols = 125
+
+local function basename(path)
+  return path and path:gsub("\\", "/"):match("([^/]+)$") or ""
+end
+
+local function activate_tmux_window(tmux_index, wezterm_index)
+  return wezterm.action_callback(function(window, pane)
+    if basename(pane:get_foreground_process_name()) == "tmux" then
+      window:perform_action(act.SendString("\x01" .. tmux_index), pane)
+    else
+      window:perform_action(act.ActivateTab(wezterm_index), pane)
+    end
+  end)
+end
+
+config.keys = {
+  { key = "1", mods = "CMD", action = activate_tmux_window("0", 0) },
+  { key = "2", mods = "CMD", action = activate_tmux_window("1", 1) },
+  { key = "3", mods = "CMD", action = activate_tmux_window("2", 2) },
+  { key = "4", mods = "CMD", action = activate_tmux_window("3", 3) },
+  { key = "5", mods = "CMD", action = activate_tmux_window("4", 4) },
+  { key = "6", mods = "CMD", action = activate_tmux_window("5", 5) },
+  { key = "7", mods = "CMD", action = activate_tmux_window("6", 6) },
+  { key = "8", mods = "CMD", action = activate_tmux_window("7", 7) },
+  { key = "9", mods = "CMD", action = activate_tmux_window("8", 8) },
+
+  { key = "[", mods = "CMD", action = act.ActivateTabRelative(-1) },
+  { key = "]", mods = "CMD", action = act.ActivateTabRelative(1) },
+}
 
 -- and finally, return the configuration to wezterm
 return config
