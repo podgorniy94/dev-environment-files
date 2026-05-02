@@ -47,6 +47,9 @@ local function activate_tmux_window(tmux_index, wezterm_index)
 end
 
 config.keys = {
+  -- Send the Shift+Enter sequence OpenCode uses for a newline in tmux
+  { key = "Enter", mods = "SHIFT", action = act.SendString("\x1b[13;2u") },
+
   { key = "1", mods = "CMD", action = activate_tmux_window("0", 0) },
   { key = "2", mods = "CMD", action = activate_tmux_window("1", 1) },
   { key = "3", mods = "CMD", action = activate_tmux_window("2", 2) },
